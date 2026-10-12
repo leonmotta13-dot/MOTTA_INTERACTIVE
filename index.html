@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOTTA INTERACTIVE | Ideas que se convierten en videojuegos</title>
+  <meta name="description" content="MOTTA INTERACTIVE: ideas que se convierten en videojuegos. Descubre nuestros juegos, contáctanos o apoya el desarrollo.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #070707;
+      --black-2: #0f0f0f;
+      --black-3: #171717;
+      --gold: #d4af37;
+      --gold-light: #f6e27a;
+      --gold-dark: #9c7a1e;
+      --text: #e9e4d4;
+      --muted: #9a9486;
+      --line: rgba(212, 175, 55, 0.22);
+      --gold-grad: linear-gradient(135deg, #f6e27a 0%, #d4af37 45%, #9c7a1e 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .gold-text {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .container { width: min(1180px, 92%); margin: 0 auto; }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(7, 7, 7, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.4rem; letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); transition: color .3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -6px;
+      width: 0; height: 1px; background: var(--gold); transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .menu-btn {
+      display: none; background: none; border: 1px solid var(--line);
+      color: var(--gold); font-size: 1.4rem; padding: 4px 12px;
+      border-radius: 6px; cursor: pointer;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; padding: 120px 0 80px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(212,175,55,.16), transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(212,175,55,.08), transparent 50%),
+        var(--black);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 70px 70px;
+      opacity: .12;
+      mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block; font-size: .78rem; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid var(--line); padding: 8px 20px; border-radius: 50px;
+      margin-bottom: 28px;
+    }
+    .hero h1 { font-size: clamp(2.8rem, 8vw, 6rem); font-weight: 900; margin-bottom: 24px; }
+    .hero p {
+      max-width: 620px; margin: 0 auto 40px;
+      color: var(--muted); font-size: 1.1rem; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block; padding: 14px 34px; border-radius: 50px;
+      font-size: .85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; border: 1px solid transparent; transition: all .35s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-gold { background: var(--gold-grad); color: #111; box-shadow: 0 8px 30px rgba(212,175,55,.25); }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(212,175,55,.4); }
+    .btn-outline { border-color: var(--gold); color: var(--gold-light); background: transparent; }
+    .btn-outline:hover { background: rgba(212,175,55,.1); transform: translateY(-3px); }
+
+    .scroll-hint {
+      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      color: var(--gold); font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
+      animation: float 2.2s ease-in-out infinite; opacity: .7;
+    }
+    @keyframes float { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 10px); } }
+
+    /* ---------- SECCIONES ---------- */
+    section { padding: 110px 0; position: relative; }
+    .section-head { text-align: center; margin-bottom: 70px; }
+    .section-head .eyebrow { margin-bottom: 18px; }
+    .section-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+    .section-head p { color: var(--muted); max-width: 560px; margin: 0 auto; font-weight: 300; }
+    .divider {
+      width: 80px; height: 2px; background: var(--gold-grad);
+      margin: 22px auto 0; border-radius: 2px;
+    }
+
+    /* ---------- JUEGOS ---------- */
+    #juegos { background: var(--black-2); }
+    .games-grid {
+      display: grid; gap: 34px;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    }
+    .game-card {
+      background: var(--black-3); border: 1px solid var(--line);
+      border-radius: 18px; overflow: hidden; transition: transform .4s, box-shadow .4s, border-color .4s;
+      display: flex; flex-direction: column;
+    }
+    .game-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
+      box-shadow: 0 25px 60px rgba(0,0,0,.6), 0 0 40px rgba(212,175,55,.15);
+    }
+    /* Reemplaza las rutas img/... por tus capturas. Si no existen, se ve el degradado dorado. */
+    .game-media {
+      height: 220px; position: relative; overflow: hidden;
+      background-size: cover; background-position: center;
+    }
+    .game-media::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--black-3), transparent 60%);
+    }
+    .media-1 { background-image: url('img/cafe-simulator.jpg'), linear-gradient(135deg, #2b2208, #8a6b17); }
+    .media-2 { background-image: url('img/farming-game.jpg'),   linear-gradient(135deg, #14210f, #6b7d1f); }
+    .media-3 { background-image: url('img/slime.jpg'),          linear-gradient(135deg, #0d2415, #1f9d4d); }
+    .media-icon {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      font-size: 4rem; z-index: 0; opacity: .35;
+    }
+    .badge {
+      position: absolute; top: 16px; right: 16px; z-index: 2;
+      background: rgba(7,7,7,.8); border: 1px solid var(--gold);
+      color: var(--gold-light); font-size: .68rem; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 50px;
+    }
+    .game-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
+    .game-body h3 { font-size: 1.55rem; margin-bottom: 10px; }
+    .game-body p { color: var(--muted); font-size: .95rem; font-weight: 300; margin-bottom: 18px; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .tags span {
+      font-size: .7rem; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--line); padding: 3px 12px; border-radius: 50px;
+    }
+    .game-link {
+      color: var(--gold-light); font-size: .82rem; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600; transition: letter-spacing .3s;
+    }
+    .game-link:hover { letter-spacing: 3.5px; }
+
+    /* ---------- CONTACTO ---------- */
+    .contact-wrap {
+      display: grid; gap: 50px; grid-template-columns: 1fr 1.2fr; align-items: start;
+    }
+    .contact-info h3 { font-size: 1.8rem; margin-bottom: 18px; }
+    .contact-info p { color: var(--muted); font-weight: 300; margin-bottom: 30px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    }
+    .contact-item .ico {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 1.2rem;
+      border: 1px solid var(--gold); color: var(--gold);
+      background: rgba(212,175,55,.06); flex-shrink: 0;
+    }
+    .contact-item small { display: block; color: var(--muted); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; }
+    .contact-item a:hover { color: var(--gold-light); }
+
+    form {
+      background: var(--black-3); border: 1px solid var(--line);
+      padding: 38px; border-radius: 18px;
+    }
+    .field { margin-bottom: 20px; }
+    label { display: block; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    input, textarea {
+      width: 100%; background: var(--black); border: 1px solid #2a2a2a;
+      border-radius: 10px; padding: 14px 16px; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: .95rem; transition: border-color .3s, box-shadow .3s;
+    }
+    input:focus, textarea:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,.15);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    form .btn { width: 100%; }
+
+    /* ---------- DONACIONES ---------- */
+    #donaciones { background: var(--black-2); text-align: center; }
+    .donate-grid {
+      display: grid; gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      max-width: 1000px; margin: 0 auto;
+    }
+    .tier {
+      background: var(--black-3); border: 1px solid var(--line);
+      border-radius: 18px; padding: 40px 30px; position: relative;
+      transition: transform .4s, border-color .4s, box-shadow .4s;
+    }
+    .tier:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 20px 50px rgba(212,175,55,.12); }
+    .tier.featured { border-color: var(--gold); box-shadow: 0 0 40px rgba(212,175,55,.12); }
+    .tier.featured::before {
+      content: 'Más popular'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--gold-grad); color: #111; font-size: .68rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; padding: 5px 18px; border-radius: 50px;
+    }
+    .tier .emoji { font-size: 2.6rem; margin-bottom: 14px; }
+    .tier h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .tier .price { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; margin: 8px 0 14px; }
+    .tier p { color: var(--muted); font-size: .92rem; font-weight: 300; margin-bottom: 26px; }
+    .donate-note { margin-top: 44px; color: var(--muted); font-size: .88rem; font-weight: 300; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      border-top: 1px solid var(--line); padding: 40px 0; text-align: center;
+      color: var(--muted); font-size: .85rem;
+    }
+    .socials { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+    .socials a {
+      font-size: .75rem; letter-spacing: 2px; text-transform: uppercase;
+      border: 1px solid var(--line); padding: 8px 20px; border-radius: 50px; transition: all .3s;
+    }
+    .socials a:hover { color: var(--gold-light); border-color: var(--gold); }
+
+    /* ---------- ANIMACIONES ---------- */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s ease, transform .9s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 860px) {
+      .menu-btn { display: block; }
+      .nav-links {
+        position: absolute; top: 70px; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: rgba(7,7,7,.97);
+        border-bottom: 1px solid var(--line);
+        max-height: 0; overflow: hidden; transition: max-height .4s;
+      }
+      .nav-links.open { max-height: 300px; }
+      .nav-links li { text-align: center; padding: 16px 0; border-top: 1px solid rgba(212,175,55,.08); }
+      .contact-wrap { grid-template-columns: 1fr; }
+      section { padding: 80px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#inicio" class="logo gold-text">MOTTA INTERACTIVE</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#juegos">Juegos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#donaciones">Donaciones</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ================= INICIO ================= -->
+  <header class="hero" id="inicio">
+    <div class="container hero-content">
+      <span class="eyebrow">MOTTA INTERACTIVE</span>
+      <h1>Ideas que se convierten en <span class="gold-text">videojuegos</span></h1>
+      <p>Creamos experiencias únicas, una línea de código a la vez. Explora nuestros proyectos, escríbenos o ayúdanos a seguir creando.</p>
+      <div class="hero-btns">
+        <a href="#juegos" class="btn btn-gold">Ver juegos</a>
+        <a href="#donaciones" class="btn btn-outline">Apoyar el proyecto</a>
+      </div>
+    </div>
+    <div class="scroll-hint">Desliza ↓</div>
+  </header>
+
+  <!-- ================= JUEGOS ================= -->
+  <section id="juegos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Portafolio</span>
+        <h2>Mis <span class="gold-text">Juegos</span></h2>
+        <p>Cada proyecto es un mundo nuevo. Estos son los que he creado y los que vienen en camino.</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="games-grid">
+
+        <!-- JUEGO 1 -->
+        <article class="game-card reveal">
+          <div class="game-media media-1">
+            <div class="media-icon">🎮</div>
+            <span class="badge">En desarrollo</span>
+          </div>
+          <div class="game-body">
+            <h3>Gaming Café Simulator</h3>
+            <p>Administra tu propio cibercafé: compra equipos, atiende clientes y haz crecer tu negocio hasta convertirlo en el mejor de la ciudad.</p>
+            <div class="tags"><span>Simulación</span><span>Gestión</span><span>PC</span></div>
+            <a href="#" class="game-link">Ver en Steam →</a>
+          </div>
+        </article>
+
+        <!-- JUEGO 2 -->
+        <article class="game-card reveal">
+          <div class="game-media media-2">
+            <div class="media-icon">🌾</div>
+            <span class="badge">Prototipo</span>
+          </div>
+          <div class="game-body">
+            <h3>Farming Automation</h3>
+            <p>Programa tus drones y automatiza tu granja. Aprende a programar resolviendo retos mientras tus cultivos crecen solos.</p>
+            <div class="tags"><span>Programación</span><span>Automatización</span><span>Puzzle</span></div>
+            <a href="#" class="game-link">Más información →</a>
+          </div>
+        </article>
+
+        <!-- JUEGO 3 -->
+        <article class="game-card reveal">
+          <div class="game-media media-3">
+            <div class="media-icon">🟢</div>
+            <span class="badge">Próximamente</span>
+          </div>
+          <div class="game-body">
+            <h3>Slime Jump</h3>
+            <p>Un slime saltarín con física de gelatina. Rebota, se estira y se aplasta en un plataformas lleno de personalidad.</p>
+            <div class="tags"><span>Plataformas</span><span>Física</span><span>2D</span></div>
+            <a href="#" class="game-link">Próximamente →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO ================= -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Hablemos</span>
+        <h2><span class="gold-text">Contacto</span></h2>
+        <p>¿Tienes una idea, una propuesta o quieres reportar algo? Escríbeme.</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="contact-info reveal">
+          <h3>Conectemos</h3>
+          <p>Respondo lo más pronto posible. Para colaboraciones, prensa o soporte, usa el formulario o cualquiera de estos medios.</p>
+
+          <div class="contact-item">
+            <div class="ico">✉</div>
+            <div><small>Correo</small><a href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico">💬</div>
+            <div><small>Discord</small><a href="#">tuusuario</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico">▶</div>
+            <div><small>YouTube</small><a href="#">youtube.com/@tucanal</a></div>
+          </div>
+        </div>
+
+        <form class="reveal" id="contactForm">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="field">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" placeholder="tucorreo@ejemplo.com" required>
+          </div>
+          <div class="field">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" placeholder="Cuéntame tu idea..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DONACIONES ================= -->
+  <section id="donaciones">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Apóyame</span>
+        <h2>Haz crecer el <span class="gold-text">proyecto</span></h2>
+        <p>Los juegos indie se hacen con tiempo y cariño. Tu apoyo me permite dedicarme a ellos.</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="donate-grid">
+        <div class="tier reveal">
+          <div class="emoji">☕</div>
+          <h3>Un café</h3>
+          <div class="price gold-text">$3</div>
+          <p>Un pequeño gesto que me da energía para seguir programando.</p>
+          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Donar</a>
+        </div>
+
+        <div class="tier featured reveal">
+          <div class="emoji">⚡</div>
+          <h3>Power-up</h3>
+          <div class="price gold-text">$10</div>
+          <p>Ayudas a pagar herramientas, assets y licencias para los juegos.</p>
+          <a href="#" class="btn btn-gold" target="_blank" rel="noopener">Donar</a>
+        </div>
+
+        <div class="tier reveal">
+          <div class="emoji">👑</div>
+          <h3>Mecenas</h3>
+          <div class="price gold-text">$25</div>
+          <p>Apoyo premium: tu nombre en los créditos de mis próximos juegos.</p>
+          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Donar</a>
+        </div>
+      </div>
+
+      <p class="donate-note reveal">También puedes apoyarme compartiendo mis juegos y añadiéndolos a tu lista de deseos en Steam. ¡Gracias!</p>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a href="#" target="_blank" rel="noopener">Steam</a>
+        <a href="#" target="_blank" rel="noopener">itch.io</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+        <a href="#" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <p>© <span id="year"></span> MOTTA INTERACTIVE. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menú móvil
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+
+    // Animación al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Formulario: abre el cliente de correo (GitHub Pages es estático, no tiene servidor).
+    // Para envío directo, cambia esto por Formspree u otro servicio.
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const correo = document.getElementById('correo').value;
+      const mensaje = document.getElementById('mensaje').value;
+      const asunto = encodeURIComponent('Contacto desde la web - ' + nombre);
+      const cuerpo = encodeURIComponent(mensaje + '\n\n—\n' + nombre + ' (' + correo + ')');
+      window.location.href = 'mailto:tucorreo@ejemplo.com?subject=' + asunto + '&body=' + cuerpo;
+    });
+
+    // Año del footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
