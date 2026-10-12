@@ -196,6 +196,76 @@
     }
     .game-link:hover { letter-spacing: 3.5px; }
 
+    /* Juego principal (tarjeta destacada a todo el ancho) */
+    .game-card.featured {
+      grid-column: 1 / -1; flex-direction: row;
+      border-color: var(--gold);
+      box-shadow: 0 0 60px rgba(212,175,55,.12);
+    }
+    .game-card.featured .game-media { flex: 1.25; height: auto; min-height: 380px; }
+    .game-card.featured .game-media::after {
+      background: linear-gradient(to right, transparent 55%, var(--black-3));
+    }
+    .game-card.featured .game-body { flex: 1; justify-content: center; padding: 50px 46px; }
+    .game-card.featured .game-body h3 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 16px; }
+    .game-card.featured .game-body p { flex: 0 1 auto; font-size: 1.02rem; }
+    .badge-main {
+      right: auto; left: 16px; background: var(--gold-grad);
+      color: #111; border-color: transparent; font-weight: 700;
+    }
+    /* Reemplaza estas rutas por tus capturas. Si no existen, se ve el degradado. */
+    .media-tracto { background-image: url('img/tracto-colombia.jpg'), linear-gradient(135deg, #1c1505, #b8941f); }
+    .media-neo { background-image: url('img/neo-retro-simulator.jpg'), linear-gradient(135deg, #160d2b, #7a2f8f); }
+
+    /* Tarjeta ancha de NEO/RETRO SIMULATOR (portada completa + galeria de 5 fotos) */
+    .game-card.wide {
+      grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr;
+    }
+    .game-card.wide .game-media { height: auto; aspect-ratio: 16 / 9; }
+    .game-card.wide .game-media::after { display: none; }
+    .game-card.wide .game-body { justify-content: center; padding: 40px; }
+    .game-card.wide .game-body h3 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); }
+    .game-card.wide .game-body p { flex: 0 1 auto; }
+
+    .gallery { grid-column: 1 / -1; padding: 6px 28px 32px; }
+    .gallery-title {
+      font-size: .75rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .gallery-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .shot {
+      position: relative; aspect-ratio: 16 / 10; padding: 0; cursor: pointer;
+      border: 1px dashed var(--gold); border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #160d2b, #2a1448);
+      display: grid; place-items: center;
+      color: var(--gold); font-family: 'Inter', sans-serif;
+      font-size: .7rem; letter-spacing: 2px; text-transform: uppercase;
+      transition: transform .3s, border-color .3s;
+    }
+    .shot:hover { transform: translateY(-4px); border-color: var(--gold-light); border-style: solid; }
+    .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200; display: none;
+      align-items: center; justify-content: center; padding: 40px 70px;
+      background: rgba(0, 0, 0, .93);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%; max-height: 88vh; border-radius: 12px;
+      border: 1px solid var(--gold); box-shadow: 0 0 60px rgba(212,175,55,.2);
+    }
+    .lb-btn {
+      position: absolute; background: rgba(7,7,7,.7); color: var(--gold-light);
+      border: 1px solid var(--gold); border-radius: 50%; cursor: pointer;
+      width: 46px; height: 46px; font-size: 1.4rem; line-height: 1;
+      transition: background .3s;
+    }
+    .lb-btn:hover { background: rgba(212,175,55,.2); }
+    .lb-close { top: 20px; right: 20px; }
+    .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
+
     /* ---------- CONTACTO ---------- */
     .contact-wrap {
       display: grid; gap: 50px; grid-template-columns: 1fr 1.2fr; align-items: start;
@@ -234,27 +304,15 @@
 
     /* ---------- DONACIONES ---------- */
     #donaciones { background: var(--black-2); text-align: center; }
-    .donate-grid {
-      display: grid; gap: 30px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      max-width: 1000px; margin: 0 auto;
+    .vaki-card {
+      max-width: 720px; margin: 0 auto; padding: 56px 40px;
+      background: var(--black-3); border: 1px solid var(--gold);
+      border-radius: 22px; box-shadow: 0 0 60px rgba(212,175,55,.12);
     }
-    .tier {
-      background: var(--black-3); border: 1px solid var(--line);
-      border-radius: 18px; padding: 40px 30px; position: relative;
-      transition: transform .4s, border-color .4s, box-shadow .4s;
-    }
-    .tier:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 20px 50px rgba(212,175,55,.12); }
-    .tier.featured { border-color: var(--gold); box-shadow: 0 0 40px rgba(212,175,55,.12); }
-    .tier.featured::before {
-      content: 'Más popular'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      background: var(--gold-grad); color: #111; font-size: .68rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; padding: 5px 18px; border-radius: 50px;
-    }
-    .tier .emoji { font-size: 2.6rem; margin-bottom: 14px; }
-    .tier h3 { font-size: 1.4rem; margin-bottom: 6px; }
-    .tier .price { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; margin: 8px 0 14px; }
-    .tier p { color: var(--muted); font-size: .92rem; font-weight: 300; margin-bottom: 26px; }
+    .vaki-emoji { font-size: 3rem; margin-bottom: 14px; }
+    .vaki-card h3 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin-bottom: 14px; }
+    .vaki-card p { color: var(--muted); font-weight: 300; max-width: 520px; margin: 0 auto 30px; }
+    .vaki-card small { display: block; margin-top: 18px; color: var(--muted); font-size: .78rem; }
     .donate-note { margin-top: 44px; color: var(--muted); font-size: .88rem; font-weight: 300; }
 
     /* ---------- FOOTER ---------- */
@@ -285,6 +343,19 @@
       .nav-links.open { max-height: 300px; }
       .nav-links li { text-align: center; padding: 16px 0; border-top: 1px solid rgba(212,175,55,.08); }
       .contact-wrap { grid-template-columns: 1fr; }
+      .game-card.featured { flex-direction: column; }
+      .game-card.featured .game-media { flex: none; min-height: 240px; }
+      .game-card.featured .game-media::after {
+        background: linear-gradient(to top, var(--black-3), transparent 60%);
+      }
+      .game-card.featured .game-body { padding: 28px; }
+      .game-card.wide { grid-template-columns: 1fr; }
+      .game-card.wide .game-body { padding: 28px; }
+      .gallery { padding: 6px 20px 26px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .shot:last-child { grid-column: 1 / -1; }
+      .lightbox { padding: 60px 14px; }
+      .vaki-card { padding: 40px 24px; }
       section { padding: 80px 0; }
     }
   </style>
@@ -330,6 +401,45 @@
       </div>
 
       <div class="games-grid">
+
+        <!-- TRACTO COLOMBIA (juego principal) -->
+        <article class="game-card featured reveal">
+          <div class="game-media media-tracto">
+            <div class="media-icon">🎮</div>
+            <span class="badge badge-main">★ Juego principal</span>
+          </div>
+          <div class="game-body">
+            <span class="badge" style="position:static; align-self:flex-start; margin-bottom:18px;">En desarrollo</span>
+            <h3 class="gold-text">TRACTO COLOMBIA</h3>
+            <p>Nuestro proyecto principal y el más ambicioso: un videojuego hecho con orgullo colombiano que estamos desarrollando con todo el cariño. Sigue su progreso y ayúdanos a terminarlo.</p>
+            <div class="tags"><span>En desarrollo</span><span>Colombia</span><span>Indie</span></div>
+            <a href="https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&amp;utm_medium=toolbar&amp;utm_campaign=v4" class="game-link" target="_blank" rel="noopener">Apoya su desarrollo →</a>
+          </div>
+        </article>
+
+        <!-- NEO/RETRO SIMULATOR -->
+        <article class="game-card wide reveal">
+          <div class="game-media media-neo">
+            <span class="badge">Próximamente</span>
+          </div>
+          <div class="game-body">
+            <h3>NEO/RETRO SIMULATOR</h3>
+            <p>Gestiona tu tienda de alquiler de máquinas retro en un local lleno de neón, arcades y videojuegos clásicos. Alquila, juega, disfruta.</p>
+            <div class="tags"><span>Simulación</span><span>Gestión</span><span>Retro</span><span>Neón</span></div>
+            <a href="#" class="game-link">Próximamente →</a>
+          </div>
+          <!-- Galería: guarda tus fotos como img/neo-retro-1.jpg ... img/neo-retro-5.jpg -->
+          <div class="gallery">
+            <div class="gallery-title">Galería · NEO/RETRO SIMULATOR</div>
+            <div class="gallery-grid">
+              <button type="button" class="shot" aria-label="Ver foto 1"><span>Foto 1</span><img src="img/neo-retro-1.jpg" alt="NEO/RETRO SIMULATOR, captura 1" onerror="this.remove()"></button>
+              <button type="button" class="shot" aria-label="Ver foto 2"><span>Foto 2</span><img src="img/neo-retro-2.jpg" alt="NEO/RETRO SIMULATOR, captura 2" onerror="this.remove()"></button>
+              <button type="button" class="shot" aria-label="Ver foto 3"><span>Foto 3</span><img src="img/neo-retro-3.jpg" alt="NEO/RETRO SIMULATOR, captura 3" onerror="this.remove()"></button>
+              <button type="button" class="shot" aria-label="Ver foto 4"><span>Foto 4</span><img src="img/neo-retro-4.jpg" alt="NEO/RETRO SIMULATOR, captura 4" onerror="this.remove()"></button>
+              <button type="button" class="shot" aria-label="Ver foto 5"><span>Foto 5</span><img src="img/neo-retro-5.jpg" alt="NEO/RETRO SIMULATOR, captura 5" onerror="this.remove()"></button>
+            </div>
+          </div>
+        </article>
 
         <!-- JUEGO 1 -->
         <article class="game-card reveal">
@@ -394,15 +504,11 @@
 
           <div class="contact-item">
             <div class="ico">✉</div>
-            <div><small>Correo</small><a href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></div>
+            <div><small>Correo</small><a href="mailto:mottainteractive@gmail.com">mottainteractive@gmail.com</a></div>
           </div>
           <div class="contact-item">
-            <div class="ico">💬</div>
-            <div><small>Discord</small><a href="#">tuusuario</a></div>
-          </div>
-          <div class="contact-item">
-            <div class="ico">▶</div>
-            <div><small>YouTube</small><a href="#">youtube.com/@tucanal</a></div>
+            <div class="ico">♪</div>
+            <div><small>TikTok</small><a href="https://www.tiktok.com/@motta_interactive?_r=1&amp;_t=ZS-9AVGayEDyk9" target="_blank" rel="noopener">@motta_interactive</a></div>
           </div>
         </div>
 
@@ -430,35 +536,17 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Apóyame</span>
-        <h2>Haz crecer el <span class="gold-text">proyecto</span></h2>
-        <p>Los juegos indie se hacen con tiempo y cariño. Tu apoyo me permite dedicarme a ellos.</p>
+        <h2>Ayúdanos a terminar <span class="gold-text">TRACTO COLOMBIA</span></h2>
+        <p>Los juegos independientes se hacen con tiempo y cariño. Con tu aporte nos ayudas a seguir desarrollando nuestro juego principal.</p>
         <div class="divider"></div>
       </div>
 
-      <div class="donate-grid">
-        <div class="tier reveal">
-          <div class="emoji">☕</div>
-          <h3>Un café</h3>
-          <div class="price gold-text">$3</div>
-          <p>Un pequeño gesto que me da energía para seguir programando.</p>
-          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Donar</a>
-        </div>
-
-        <div class="tier featured reveal">
-          <div class="emoji">⚡</div>
-          <h3>Power-up</h3>
-          <div class="price gold-text">$10</div>
-          <p>Ayudas a pagar herramientas, assets y licencias para los juegos.</p>
-          <a href="#" class="btn btn-gold" target="_blank" rel="noopener">Donar</a>
-        </div>
-
-        <div class="tier reveal">
-          <div class="emoji">👑</div>
-          <h3>Mecenas</h3>
-          <div class="price gold-text">$25</div>
-          <p>Apoyo premium: tu nombre en los créditos de mis próximos juegos.</p>
-          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Donar</a>
-        </div>
+      <div class="vaki-card reveal">
+        <div class="vaki-emoji">🎮</div>
+        <h3>Apoya <span class="gold-text">TRACTO COLOMBIA</span></h3>
+        <p>Cada aporte nos ayuda a terminar el juego. Puedes donar el valor que quieras a través de nuestra colecta en Vaki.</p>
+        <a href="https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&amp;utm_medium=toolbar&amp;utm_campaign=v4" class="btn btn-gold" target="_blank" rel="noopener">Donación Vaki</a>
+        <small>Se abrirá Vaki en una pestaña nueva.</small>
       </div>
 
       <p class="donate-note reveal">También puedes apoyarme compartiendo mis juegos y añadiéndolos a tu lista de deseos en Steam. ¡Gracias!</p>
@@ -471,12 +559,19 @@
       <div class="socials">
         <a href="#" target="_blank" rel="noopener">Steam</a>
         <a href="#" target="_blank" rel="noopener">itch.io</a>
-        <a href="#" target="_blank" rel="noopener">YouTube</a>
-        <a href="#" target="_blank" rel="noopener">Discord</a>
+        <a href="https://www.tiktok.com/@motta_interactive?_r=1&amp;_t=ZS-9AVGayEDyk9" target="_blank" rel="noopener">TikTok</a>
       </div>
       <p>© <span id="year"></span> MOTTA INTERACTIVE. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- Visor de fotos -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+    <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Foto anterior">‹</button>
+    <img id="lbImg" alt="">
+    <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Foto siguiente">›</button>
+  </div>
 
   <script>
     // Menú móvil
@@ -507,7 +602,42 @@
       const mensaje = document.getElementById('mensaje').value;
       const asunto = encodeURIComponent('Contacto desde la web - ' + nombre);
       const cuerpo = encodeURIComponent(mensaje + '\n\n—\n' + nombre + ' (' + correo + ')');
-      window.location.href = 'mailto:tucorreo@ejemplo.com?subject=' + asunto + '&body=' + cuerpo;
+      window.location.href = 'mailto:mottainteractive@gmail.com?subject=' + asunto + '&body=' + cuerpo;
+    });
+
+    // Galería de NEO/RETRO: visor de fotos (solo abre los espacios que ya tienen foto)
+    const shots = [...document.querySelectorAll('.shot')];
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    let lbList = [];
+    let lbIndex = 0;
+
+    function showPhoto(i) {
+      lbIndex = (i + lbList.length) % lbList.length;
+      lbImg.src = lbList[lbIndex].src;
+      lbImg.alt = lbList[lbIndex].alt;
+    }
+    function closeLightbox() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+    }
+    shots.forEach(btn => btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      if (!img) return; // espacio vacío: todavía no hay foto
+      lbList = shots.map(b => b.querySelector('img')).filter(Boolean);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      showPhoto(lbList.indexOf(img));
+    }));
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => showPhoto(lbIndex - 1));
+    document.getElementById('lbNext').addEventListener('click', () => showPhoto(lbIndex + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
+      if (e.key === 'ArrowRight') showPhoto(lbIndex + 1);
     });
 
     // Año del footer
