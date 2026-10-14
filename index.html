@@ -124,6 +124,10 @@
     font-size: 1.05rem; letter-spacing: 1px; transition: all .25s;
   }
   .m-correo:hover { background: #d4af37; color: #000; }
+  .m-contactos {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 30px;
+  }
+  .m-contactos .m-correo { margin-top: 0; }
 
   /* FOOTER */
   .m-footer {
@@ -224,7 +228,10 @@
       <h2 class="m-titulo">CONTACTO</h2>
       <div class="m-linea"></div>
       <p>¿Tienes preguntas, ideas o propuestas? Escríbenos.</p>
-      <a href="#" id="m-correo" class="m-correo" onclick="return MOTTA.escribir()">Escríbenos</a>
+      <div class="m-contactos">
+        <a href="#" id="m-correo" class="m-correo" onclick="return MOTTA.escribir()">Escríbenos</a>
+        <a href="https://www.tiktok.com/@motta_interactive" class="m-correo" target="_blank" rel="noopener">TikTok @motta_interactive</a>
+      </div>
     </div>
   </section>
 
@@ -240,7 +247,7 @@
   ============================================================ */
   var MOTTA_CONFIG = {
 
-    logo: "img/logo.jpeg",           // imagen del logo de la empresa, ej: "img/logo.png"
+    logo: "",           // imagen del logo de la empresa, ej: "img/logo.png"
 
     linkDonacion: "https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&utm_medium=toolbar&utm_campaign=v4",   // enlace de donación (PayPal, Ko-fi, Patreon...)
     correo: "mottainteractive@gmail.com",         // correo de contacto
