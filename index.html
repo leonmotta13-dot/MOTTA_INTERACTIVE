@@ -286,4 +286,61 @@
 
     abrir: function (url) {
       var w = window.open(url, "_blank");
-      if (!w) { window.location.href
+      if (!w) { window.location.href = url; }
+    },
+
+    comprar: function (i) {
+      var j = MOTTA_CONFIG.juegos[i];
+      if (j && j.linkCompra) { MOTTA.abrir(j.linkCompra); }
+      else { MOTTA.aviso("El enlace de compra de " + (j ? j.nombre : "este juego") + " estará disponible pronto."); }
+      return false;
+    },
+
+    donar: function () {
+      if (MOTTA_CONFIG.linkDonacion) { MOTTA.abrir(MOTTA_CONFIG.linkDonacion); }
+      else { MOTTA.aviso("El enlace de donación estará disponible pronto."); }
+      return false;
+    },
+
+    escribir: function () {
+      if (MOTTA_CONFIG.correo) { window.location.href = "mailto:" + MOTTA_CONFIG.correo; }
+      else { MOTTA.aviso("El correo de contacto estará disponible pronto."); }
+      return false;
+    },
+
+    iniciar: function () {
+      var C = MOTTA_CONFIG;
+
+      if (C.logo) {
+        document.querySelectorAll("[data-logo]").forEach(function (el) {
+          el.style.backgroundImage = "url('" + C.logo + "')";
+          el.textContent = "";
+        });
+      }
+
+      C.juegos.forEach(function (j, i) {
+        var card = document.getElementById("juego" + (i + 1));
+        if (!card) return;
+        card.querySelector("[data-nombre]").textContent = j.nombre;
+        if (j.precio) card.querySelector("[data-precio]").textContent = j.precio;
+        if (j.imagen) {
+          var img = card.querySelector("[data-img]");
+          img.style.backgroundImage = "url('" + j.imagen + "')";
+          img.textContent = "";
+        }
+      });
+
+      if (C.correo) document.getElementById("m-correo").textContent = C.correo;
+      document.getElementById("m-year").textContent = new Date().getFullYear();
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", MOTTA.iniciar);
+  } else {
+    MOTTA.iniciar();
+  }
+</script>
+
+</body>
+</html>
