@@ -1,192 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOTTA INTERACTIVE | Ideas que se convierten en videojuegos</title>
-  <meta name="description" content="MOTTA INTERACTIVE: ideas que se convierten en videojuegos. Descubre nuestros juegos, contáctanos o apoya el desarrollo.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOTTA INTERACTIVE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --black: #070707;
-      --black-2: #0f0f0f;
-      --black-3: #171717;
-      --gold: #d4af37;
-      --gold-light: #f6e27a;
-      --gold-dark: #9c7a1e;
-      --text: #e9e4d4;
-      --muted: #9a9486;
-      --line: rgba(212, 175, 55, 0.22);
-      --gold-grad: linear-gradient(135deg, #f6e27a 0%, #d4af37 45%, #9c7a1e 100%);
-    }
+<style>
+  html { scroll-behavior: smooth; background: #070707; }
+  body { margin: 0; padding: 0; background: #070707; color: #e9e4d4; font-family: 'Poppins', Arial, sans-serif; line-height: 1.6; }
+  * { box-sizing: border-box; }
+  a { text-decoration: none; cursor: pointer; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  /* NAV */
+  .m-nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 6%;
+    background: #070707;
+    border-bottom: 1px solid #9c7a1a;
+  }
+  .m-logo { font-family: 'Cinzel', Georgia, serif; font-weight: 800; letter-spacing: 3px; color: #f5d76e; }
+  .m-nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .m-nav ul a { font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; color: #e9e4d4; transition: color .25s; }
+  .m-nav ul a:hover { color: #f5d76e; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+  /* HERO */
+  .m-hero {
+    min-height: 88vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 80px 6%;
+    background: radial-gradient(circle at 50% 30%, #2a2208 0%, #0d0d0d 55%, #000 100%);
+    border-bottom: 1px solid #9c7a1a;
+  }
+  .m-hero h1 {
+    margin: 0; font-family: 'Cinzel', Georgia, serif; font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 5rem); letter-spacing: 6px;
+    color: #d4af37;
+    text-shadow: 0 0 30px rgba(212,175,55,.35);
+  }
+  .m-linea { width: 120px; height: 2px; margin: 26px auto; background: #d4af37; }
+  .m-hero p { margin: 0; font-size: clamp(.9rem, 2.2vw, 1.3rem); letter-spacing: 5px; color: #f5d76e; font-weight: 300; }
 
-    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.15; }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+  .m-btn {
+    display: inline-block; margin-top: 38px; padding: 14px 38px;
+    font-weight: 600; letter-spacing: 2px; font-size: .85rem; text-transform: uppercase;
+    color: #000000; background: #d4af37; border: none;
+    transition: transform .25s, box-shadow .25s, background .25s;
+  }
+  .m-btn:hover { background: #f5d76e; transform: translateY(-3px); box-shadow: 0 8px 28px rgba(212,175,55,.4); }
 
-    .gold-text {
-      background: var(--gold-grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  /* SECCIONES */
+  .m-seccion { padding: 90px 6%; background: #070707; }
+  .m-seccion.alt { background: #111111; }
+  .m-titulo {
+    margin: 0; text-align: center; font-family: 'Cinzel', Georgia, serif; font-weight: 600;
+    font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: 4px; color: #d4af37;
+  }
+  .m-sub { text-align: center; color: #9a9684; margin: 8px 0 0; font-weight: 300; }
 
-    .container { width: min(1180px, 92%); margin: 0 auto; }
+  /* CUADROS */
+  .m-caja {
+    max-width: 700px; margin: 0 auto; padding: 50px 34px; text-align: center;
+    background: #1a1a1a; border: 1px solid #9c7a1a; border-top: 3px solid #d4af37;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .m-caja:hover { transform: translateY(-8px); border-color: #f5d76e; box-shadow: 0 14px 40px rgba(212,175,55,.2); }
+  .m-caja p { margin: 10px 0 0; color: #b9b5a2; font-weight: 300; }
+  .m-caja .m-btn { margin-top: 30px; }
 
-    /* ---------- NAV ---------- */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(7, 7, 7, 0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 70px;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 1.4rem; letter-spacing: 1px;
-    }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--muted); transition: color .3s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; left: 0; bottom: -6px;
-      width: 0; height: 1px; background: var(--gold); transition: width .3s;
-    }
-    .nav-links a:hover { color: var(--gold-light); }
-    .nav-links a:hover::after { width: 100%; }
+  /* JUEGOS */
+  .m-juegos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px; max-width: 1000px; margin: 60px auto 0;
+  }
+  .m-card {
+    background: #1a1a1a; border: 1px solid #9c7a1a; position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .m-card:hover { transform: translateY(-8px); border-color: #f5d76e; box-shadow: 0 14px 40px rgba(212,175,55,.2); }
+  .m-img {
+    width: 100%; height: 230px;
+    background-color: #000; background-position: center; background-size: cover; background-repeat: no-repeat;
+    display: flex; align-items: center; justify-content: center;
+    color: #9c7a1a; font-size: .8rem; letter-spacing: 3px;
+    border-bottom: 1px solid #9c7a1a;
+  }
+  .m-estado {
+    position: absolute; top: 14px; right: 14px; z-index: 2;
+    padding: 5px 14px; font-size: .7rem; letter-spacing: 2px; font-weight: 600;
+    text-transform: uppercase; background: #000; color: #d4af37; border: 1px solid #d4af37;
+  }
+  .m-estado.listo { background: #d4af37; color: #000; }
+  .m-info { padding: 26px; }
+  .m-info h3 { margin: 0; font-family: 'Cinzel', Georgia, serif; font-size: 1.35rem; letter-spacing: 2px; color: #f5d76e; }
+  .m-precio { margin: 10px 0 20px; font-size: 1.5rem; font-weight: 600; color: #d4af37; }
+  .m-card .m-btn { margin-top: 0; width: 100%; text-align: center; }
 
-    .menu-btn {
-      display: none; background: none; border: 1px solid var(--line);
-      color: var(--gold); font-size: 1.4rem; padding: 4px 12px;
-      border-radius: 6px; cursor: pointer;
-    }
+  /* CONTACTO */
+  .m-correo {
+    display: inline-block; margin-top: 30px; padding: 16px 34px;
+    border: 1px solid #d4af37; background: transparent; color: #f5d76e;
+    font-size: 1.05rem; letter-spacing: 1px; transition: all .25s;
+  }
+  .m-correo:hover { background: #d4af37; color: #000; }
 
-    /* ---------- HERO ---------- */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      text-align: center; position: relative; padding: 120px 0 80px;
-      background:
-        radial-gradient(ellipse at 50% 30%, rgba(212,175,55,.16), transparent 60%),
-        radial-gradient(ellipse at 80% 90%, rgba(212,175,55,.08), transparent 50%),
-        var(--black);
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 70px 70px;
-      opacity: .12;
-      mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
-    }
-    .hero-content { position: relative; z-index: 1; }
-    .eyebrow {
-      display: inline-block; font-size: .78rem; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--gold);
-      border: 1px solid var(--line); padding: 8px 20px; border-radius: 50px;
-      margin-bottom: 28px;
-    }
-    .hero h1 { font-size: clamp(2.8rem, 8vw, 6rem); font-weight: 900; margin-bottom: 24px; }
-    .hero p {
-      max-width: 620px; margin: 0 auto 40px;
-      color: var(--muted); font-size: 1.1rem; font-weight: 300;
-    }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  /* FOOTER */
+  .m-footer {
+    text-align: center; padding: 34px 6%; background: #070707;
+    border-top: 1px solid #9c7a1a; font-size: .8rem; letter-spacing: 2px; color: #7d7a6a;
+  }
+  .m-footer span { color: #d4af37; }
 
-    .btn {
-      display: inline-block; padding: 14px 34px; border-radius: 50px;
-      font-size: .85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; border: 1px solid transparent; transition: all .35s;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-gold { background: var(--gold-grad); color: #111; box-shadow: 0 8px 30px rgba(212,175,55,.25); }
-    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(212,175,55,.4); }
-    .btn-outline { border-color: var(--gold); color: var(--gold-light); background: transparent; }
-    .btn-outline:hover { background: rgba(212,175,55,.1); transform: translateY(-3px); }
+  /* AVISO */
+  #m-aviso {
+    position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 20px);
+    z-index: 99999; padding: 14px 28px; background: #000; color: #f5d76e;
+    border: 1px solid #d4af37; font-size: .9rem; letter-spacing: 1px;
+    opacity: 0; pointer-events: none; transition: all .3s;
+  }
+  #m-aviso.ver { opacity: 1; transform: translate(-50%, 0); }
 
-    .scroll-hint {
-      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-      color: var(--gold); font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
-      animation: float 2.2s ease-in-out infinite; opacity: .7;
-    }
-    @keyframes float { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 10px); } }
+  @media (max-width: 640px) {
+    .m-nav ul { gap: 14px; }
+    .m-nav ul a { font-size: .7rem; letter-spacing: 1px; }
+    .m-logo { font-size: .85rem; }
+    .m-caja { padding: 40px 20px; }
+  }
+</style>
+</head>
 
-    /* ---------- SECCIONES ---------- */
-    section { padding: 110px 0; position: relative; }
-    .section-head { text-align: center; margin-bottom: 70px; }
-    .section-head .eyebrow { margin-bottom: 18px; }
-    .section-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
-    .section-head p { color: var(--muted); max-width: 560px; margin: 0 auto; font-weight: 300; }
-    .divider {
-      width: 80px; height: 2px; background: var(--gold-grad);
-      margin: 22px auto 0; border-radius: 2px;
-    }
+<body>
 
-    /* ---------- JUEGOS ---------- */
-    #juegos { background: var(--black-2); }
-    .games-grid {
-      display: grid; gap: 34px;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  <nav class="m-nav">
+    <div class="m-logo">MOTTA INTERACTIVE</div>
+    <ul>
+      <li><a href="#m-inicio">Inicio</a></li>
+      <li><a href="#m-juegos">Juegos</a></li>
+      <li><a href="#m-donacion">Donar</a></li>
+      <li><a href="#m-contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECCIÓN PRINCIPAL -->
+  <header class="m-hero" id="m-inicio">
+    <h1>MOTTA INTERACTIVE</h1>
+    <div class="m-linea"></div>
+    <p>IDEAS QUE SE CONVIERTEN EN VIDEOJUEGOS</p>
+    <a href="#m-juegos" class="m-btn">Ver juegos</a>
+  </header>
+
+  <!-- JUEGOS -->
+  <section class="m-seccion alt" id="m-juegos">
+    <h2 class="m-titulo">NUESTROS JUEGOS</h2>
+    <p class="m-sub">Creaciones de Motta Interactive</p>
+
+    <div class="m-juegos">
+
+      <article class="m-card" id="juego1">
+        <span class="m-estado">En desarrollo</span>
+        <div class="m-img" data-img>IMAGEN DEL JUEGO</div>
+        <div class="m-info">
+          <h3 data-nombre>TRACTO COLOMBIA</h3>
+          <div class="m-precio" data-precio>Precio por definir</div>
+          <a href="#" class="m-btn" onclick="return MOTTA.comprar(0)">Comprar</a>
+        </div>
+      </article>
+
+      <article class="m-card" id="juego2">
+        <span class="m-estado listo">Disponible</span>
+        <div class="m-img" data-img>IMAGEN DEL JUEGO</div>
+        <div class="m-info">
+          <h3 data-nombre>NEO/RETRO SIMULATOR</h3>
+          <div class="m-precio" data-precio>Precio por definir</div>
+          <a href="#" class="m-btn" onclick="return MOTTA.comprar(1)">Comprar</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- DONACIÓN -->
+  <section class="m-seccion" id="m-donacion">
+    <div class="m-caja">
+      <h2 class="m-titulo">APOYA EL PROYECTO</h2>
+      <div class="m-linea"></div>
+      <p>
+        Cada aporte nos ayuda a seguir creando videojuegos y a que nuestras ideas
+        lleguen más lejos. ¡Gracias por ser parte de Motta Interactive!
+      </p>
+      <a href="#" class="m-btn" onclick="return MOTTA.donar()">Donar</a>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="m-seccion alt" id="m-contacto">
+    <div class="m-caja">
+      <h2 class="m-titulo">CONTACTO</h2>
+      <div class="m-linea"></div>
+      <p>¿Tienes preguntas, ideas o propuestas? Escríbenos.</p>
+      <a href="#" id="m-correo" class="m-correo" onclick="return MOTTA.escribir()">Escríbenos</a>
+    </div>
+  </section>
+
+  <footer class="m-footer">
+    © <span id="m-year">2026</span> <span>MOTTA INTERACTIVE</span> — IDEAS QUE SE CONVIERTEN EN VIDEOJUEGOS
+  </footer>
+
+  <div id="m-aviso"></div>
+
+<script>
+  /* ============================================================
+     CONFIGURACIÓN — RELLENA AQUÍ TUS DATOS
+  ============================================================ */
+  var MOTTA_CONFIG = {
+
+    linkDonacion: "https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&utm_medium=toolbar&utm_campaign=v4",   // enlace de donación (PayPal, Ko-fi, Patreon...)
+    correo: "mottainteractive@gmail.com",         // correo de contacto
+
+    juegos: [
+      {
+        nombre: "TRACTO COLOMBIA",
+        precio: "?",       // ej: "$9.99 USD"
+        imagen: "img/Tractocolombia.jpeg",       // ruta o URL de la imagen
+        linkCompra: "?"    // link donde se compra
+      },
+      {
+        nombre: "NEO/RETRO SIMULATOR",
+        precio: "10.000",
+        imagen: "img/neo-retro-simulator.jpeg",
+        linkCompra: "https://motta-interactive.itch.io/neoretro"
+      }
+    ]
+  };
+
+  /* ============================================================
+     LÓGICA (no necesitas tocar nada de aquí hacia abajo)
+  ============================================================ */
+  var MOTTA = {
+
+    aviso: function (texto) {
+      var el = document.getElementById("m-aviso");
+      if (!el) return;
+      el.textContent = texto;
+      el.classList.add("ver");
+      clearTimeout(window.__mottaT);
+      window.__mottaT = setTimeout(function () { el.classList.remove("ver"); }, 2800);
+    },
+
+    abrir: function (url) {
+      var w = window.open(url, "_blank");
+      if (!w) { window.location.href = url; }
+    },
+
+    comprar: function (i) {
+      var j = MOTTA_CONFIG.juegos[i];
+      if (j && j.linkCompra) { MOTTA.abrir(j.linkCompra); }
+      else { MOTTA.aviso("El enlace de compra de " + (j ? j.nombre : "este juego") + " estará disponible pronto."); }
+      return false;
+    },
+
+    donar: function () {
+      if (MOTTA_CONFIG.linkDonacion) { MOTTA.abrir(MOTTA_CONFIG.linkDonacion); }
+      else { MOTTA.aviso("El enlace de donación estará disponible pronto."); }
+      return false;
+    },
+
+    escribir: function () {
+      if (MOTTA_CONFIG.correo) { window.location.href = "mailto:" + MOTTA_CONFIG.correo; }
+      else { MOTTA.aviso("El correo de contacto estará disponible pronto."); }
+      return false;
+    },
+
+    iniciar: function () {
+      var C = MOTTA_CONFIG;
+
+      C.juegos.forEach(function (j, i) {
+        var card = document.getElementById("juego" + (i + 1));
+        if (!card) return;
+        card.querySelector("[data-nombre]").textContent = j.nombre;
+        if (j.precio) card.querySelector("[data-precio]").textContent = j.precio;
+        if (j.imagen) {
+          var img = card.querySelector("[data-img]");
+          img.style.backgroundImage = "url('" + j.imagen + "')";
+          img.textContent = "";
+        }
+      });
+
+      if (C.correo) document.getElementById("m-correo").textContent = C.correo;
+      document.getElementById("m-year").textContent = new Date().getFullYear();
     }
-    .game-card {
-      background: var(--black-3); border: 1px solid var(--line);
-      border-radius: 18px; overflow: hidden; transition: transform .4s, box-shadow .4s, border-color .4s;
-      display: flex; flex-direction: column;
-    }
-    .game-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--gold);
-      box-shadow: 0 25px 60px rgba(0,0,0,.6), 0 0 40px rgba(212,175,55,.15);
-    }
-    /* Reemplaza las rutas img/... por tus capturas. Si no existen, se ve el degradado dorado. */
-    .game-media {
-      height: 220px; position: relative; overflow: hidden;
-      background-size: cover; background-position: center;
-    }
-    .game-media::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, var(--black-3), transparent 60%);
-    }
-    .media-icon {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      font-size: 4rem; z-index: 0; opacity: .35;
-    }
-    .badge {
-      position: absolute; top: 16px; right: 16px; z-index: 2;
-      background: rgba(7,7,7,.8); border: 1px solid var(--gold);
-      color: var(--gold-light); font-size: .68rem; letter-spacing: 2px;
-      text-transform: uppercase; padding: 5px 14px; border-radius: 50px;
-    }
-    .game-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
-    .game-body h3 { font-size: 1.55rem; margin-bottom: 10px; }
-    .game-body p { color: var(--muted); font-size: .95rem; font-weight: 300; margin-bottom: 18px; flex: 1; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-    .tags span {
-      font-size: .7rem; letter-spacing: 1px; text-transform: uppercase;
-      color: var(--gold); border: 1px solid var(--line); padding: 3px 12px; border-radius: 50px;
-    }
-    .game-link {
-      color: var(--gold-light); font-size: .82rem; letter-spacing: 2px;
-      text-transform: uppercase;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", MOTTA.iniciar);
+  } else {
+    MOTTA.iniciar();
+  }
+</script>
+
+</body>
+</html>
