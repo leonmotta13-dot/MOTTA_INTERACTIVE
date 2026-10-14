@@ -1,4 +1,4 @@
-<!DOCTYPE html> /* cambios guardados */
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -13,14 +13,33 @@
   * { box-sizing: border-box; }
   a { text-decoration: none; cursor: pointer; }
 
+  /* LOGO REDONDO (se usa en el menú y en la portada) */
+  .m-logo-img {
+    border-radius: 50%;
+    border: 2px solid #d4af37;
+    background-color: #000;
+    background-position: center; background-size: cover; background-repeat: no-repeat;
+    display: flex; align-items: center; justify-content: center;
+    color: #d4af37; font-family: 'Cinzel', Georgia, serif; font-weight: 800; letter-spacing: 2px;
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 0 18px rgba(212,175,55,.35);
+  }
+  .m-logo-img.chico { width: 46px; height: 46px; font-size: 1.1rem; }
+  .m-logo-img.grande {
+    width: 180px; height: 180px; font-size: 1.1rem; margin-bottom: 34px;
+    border-width: 3px;
+    box-shadow: 0 0 0 8px rgba(212,175,55,.08), 0 0 50px rgba(212,175,55,.35);
+  }
+
   /* NAV */
   .m-nav {
     position: sticky; top: 0; z-index: 50;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 6%;
+    padding: 12px 6%;
     background: #070707;
     border-bottom: 1px solid #9c7a1a;
   }
+  .m-marca { display: flex; align-items: center; gap: 14px; }
   .m-logo { font-family: 'Cinzel', Georgia, serif; font-weight: 800; letter-spacing: 3px; color: #f5d76e; }
   .m-nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
   .m-nav ul a { font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; color: #e9e4d4; transition: color .25s; }
@@ -125,7 +144,8 @@
   @media (max-width: 640px) {
     .m-nav ul { gap: 14px; }
     .m-nav ul a { font-size: .7rem; letter-spacing: 1px; }
-    .m-logo { font-size: .85rem; }
+    .m-logo { display: none; }
+    .m-logo-img.grande { width: 140px; height: 140px; }
     .m-caja { padding: 40px 20px; }
   }
 </style>
@@ -134,7 +154,10 @@
 <body>
 
   <nav class="m-nav">
-    <div class="m-logo">MOTTA INTERACTIVE</div>
+    <div class="m-marca">
+      <div class="m-logo-img chico" data-logo>M</div>
+      <div class="m-logo">MOTTA INTERACTIVE</div>
+    </div>
     <ul>
       <li><a href="#m-inicio">Inicio</a></li>
       <li><a href="#m-juegos">Juegos</a></li>
@@ -145,6 +168,7 @@
 
   <!-- SECCIÓN PRINCIPAL -->
   <header class="m-hero" id="m-inicio">
+    <div class="m-logo-img grande" data-logo>LOGO</div>
     <h1>MOTTA INTERACTIVE</h1>
     <div class="m-linea"></div>
     <p>IDEAS QUE SE CONVIERTEN EN VIDEOJUEGOS</p>
@@ -216,6 +240,8 @@
   ============================================================ */
   var MOTTA_CONFIG = {
 
+    logo: "",           // imagen del logo de la empresa, ej: "img/logo.png"
+
     linkDonacion: "https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&utm_medium=toolbar&utm_campaign=v4",   // enlace de donación (PayPal, Ko-fi, Patreon...)
     correo: "mottainteractive@gmail.com",         // correo de contacto
 
@@ -275,6 +301,13 @@
 
     iniciar: function () {
       var C = MOTTA_CONFIG;
+
+      if (C.logo) {
+        document.querySelectorAll("[data-logo]").forEach(function (el) {
+          el.style.backgroundImage = "url('" + C.logo + "')";
+          el.textContent = "";
+        });
+      }
 
       C.juegos.forEach(function (j, i) {
         var card = document.getElementById("juego" + (i + 1));
