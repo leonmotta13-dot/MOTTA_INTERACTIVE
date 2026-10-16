@@ -731,6 +731,7 @@
 
     linkDonacion: "https://vaki.co/es/vaki/desarrollo-de-tracto-colombia?utm_source=copy&utm_medium=toolbar&utm_campaign=v4",   // enlace de donación (PayPal, Ko-fi, Patreon...)
     correo: "mottainteractive@gmail.com",         // correo de contacto
+    whatsapp: "573001234567",   // WhatsApp: código de país + número, sin +, espacios ni guiones (Colombia = 57)
 
     juegos: [
       {
@@ -747,7 +748,7 @@
       }
     ],
 
-    /* Planes de páginas web: solo se usan para armar el correo de cotización.
+    /* Planes de páginas web: solo se usan para armar el mensaje de cotización.
        Los textos y precios que se ven están en el HTML de la sección #m-servicios. */
     planes: [
       { nombre: "Plan Básico",  precio: "300.000 COP" },
@@ -784,19 +785,17 @@
       return false;
     },
 
+    /* COTIZAR: abre WhatsApp con el mensaje del plan ya escrito */
     cotizar: function (i) {
       var p = MOTTA_CONFIG.planes[i];
       if (!p) return false;
-      if (!MOTTA_CONFIG.correo) {
-        MOTTA.aviso("El correo de contacto estará disponible pronto.");
+      if (!MOTTA_CONFIG.whatsapp) {
+        MOTTA.aviso("El WhatsApp de contacto estará disponible pronto.");
         return false;
       }
-      var asunto = "Cotización página web - " + p.nombre;
-      var cuerpo = "Hola, me interesa el " + p.nombre + " (" + p.precio + ") para mi negocio.\n\n" +
-                   "Nombre:\nTipo de negocio:\nCiudad:\n\nGracias.";
-      window.location.href = "mailto:" + MOTTA_CONFIG.correo +
-        "?subject=" + encodeURIComponent(asunto) +
-        "&body=" + encodeURIComponent(cuerpo);
+      var mensaje = "Hola, me interesa el " + p.nombre + " (" + p.precio + ") para mi negocio.\n\n" +
+                    "Nombre:\nTipo de negocio:\nCiudad:\n\nGracias.";
+      MOTTA.abrir("https://wa.me/" + MOTTA_CONFIG.whatsapp + "?text=" + encodeURIComponent(mensaje));
       return false;
     },
 
